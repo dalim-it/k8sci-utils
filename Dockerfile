@@ -13,4 +13,14 @@ RUN apk add --no-cache curl \
     && curl \
         -L https://github.com/zegl/kube-score/releases/download/v1.2.1/kube-score_1.2.1_linux_amd64 \
         -o /usr/local/bin/kube-score \
-    && chmod +x /usr/local/bin/kubectl /usr/local/bin/kustomize /usr/local/bin/kubeval /usr/local/bin/kube-score
+    && curl \
+        -L https://get.helm.sh/helm-v3.6.2-linux-amd64.tar.gz \
+        | tar xvz -C /tmp linux-amd64/helm \
+        && mv /tmp/linux-amd64/helm /usr/local/bin \
+        && rmdir /tmp/linux-amd64 \
+    && chmod +x \
+        /usr/local/bin/kubectl \
+        /usr/local/bin/kustomize \
+        /usr/local/bin/kubeval \
+        /usr/local/bin/kube-score \
+        /usr/local/bin/helm
