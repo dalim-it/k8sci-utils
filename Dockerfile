@@ -1,17 +1,17 @@
-FROM alpine:3.10.1
+FROM alpine:3.14
 
 RUN apk add --no-cache curl \
     && curl \
-        -L https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl \
+        -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
         -o /usr/local/bin/kubectl \
     && curl \
-        -L https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64 \
+        -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.2.0/kustomize_v4.2.0_linux_amd64.tar.gz \
         -o /usr/local/bin/kustomize \
     && curl \
-        -L https://github.com/instrumenta/kubeval/releases/download/0.13.0/kubeval-linux-amd64.tar.gz \
+        -L https://github.com/instrumenta/kubeval/releases/download/v0.16.1/kubeval-linux-amd64.tar.gz \
         | tar xvz -C /usr/local/bin kubeval \
     && curl \
-        -L https://github.com/zegl/kube-score/releases/download/v1.2.1/kube-score_1.2.1_linux_amd64 \
+        -L https://github.com/zegl/kube-score/releases/download/v1.11.0/kube-score_1.11.0_linux_amd64 \
         -o /usr/local/bin/kube-score \
     && curl \
         -L https://get.helm.sh/helm-v3.6.2-linux-amd64.tar.gz \
